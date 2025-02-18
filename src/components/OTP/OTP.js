@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import "./OTP.css";
+import OTPInput from "./OTPInput";
+
 export default function OTP() {
   const [generatedOTP, setGeneratedOTP] = useState("");
   const [userInput, setUserInput] = useState("");
   const [message, setMessage] = useState("");
 
   const generateOTP = () => {
-    // Generate 6 digit OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
+    const otp = Math.floor(1000 + Math.random() * 9000);
     setGeneratedOTP(otp.toString());
     setMessage("");
     setUserInput("");
@@ -20,6 +21,7 @@ export default function OTP() {
       setMessage("Invalid OTP! Try again.");
     }
   };
+
   return (
     <div className="container">
       <h1>OTP Generator & Validator</h1>
@@ -30,13 +32,7 @@ export default function OTP() {
       </div>
 
       <div className="validator-section">
-        <input
-          type="text"
-          placeholder="Enter OTP to validate"
-          value={userInput}
-          onChange={(e) => setUserInput(e.target.value)}
-          maxLength={6}
-        />
+        <OTPInput onOTPChange={setUserInput} />
         <button onClick={validateOTP}>Validate OTP</button>
       </div>
 
